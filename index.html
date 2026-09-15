@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>MIDN8 SIX7</title>
+<title>REZBELT DIZEN FL</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -310,9 +310,25 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ba
 #fbSendBtn{width:100%;padding:13px 0;background:rgba(255,215,0,0.10);border:1px solid rgba(255,215,0,0.4);color:#ffd700;font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:5px;cursor:pointer;}
 #fbSendBtn:disabled{opacity:0.3;cursor:not-allowed;}
 .fb-done-msg{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:4px;color:rgba(100,255,160,0.9);text-align:center;padding:8px 0;}
+
+#splashScreen{position:fixed;inset:0;z-index:100000;display:none;flex-direction:column;align-items:center;justify-content:center;background:#000;opacity:1;transition:opacity 0.6s ease;pointer-events:none;}
+#splashScreen.show{display:flex;}
+#splashScreen.fadeout{opacity:0;}
+.splash-owl{font-size:48px;margin-bottom:6px;animation:owlFloat 3s ease-in-out infinite;}
+.splash-welcome{font-size:10px;font-weight:700;letter-spacing:5px;color:rgba(255,255,255,0.4);margin-bottom:4px;}
+.splash-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,9vw,56px);color:#fff;letter-spacing:5px;line-height:1;text-align:center;text-shadow:0 4px 30px rgba(0,0,0,0.8);}
+.splash-dev{font-size:9px;font-weight:700;letter-spacing:4px;color:rgba(255,215,0,0.55);margin-top:8px;margin-bottom:26px;}
+.splash-quote{font-size:clamp(11px,3vw,13px);font-weight:500;color:rgba(255,255,255,0.55);text-align:center;line-height:1.9;max-width:320px;padding:0 26px;font-style:italic;}
 </style>
 </head>
 <body>
+<div id="splashScreen">
+  <div class="splash-owl">🦉</div>
+  <div class="splash-welcome">WELCOME TO</div>
+  <div class="splash-title">REZBELT<br>DIZEN FL</div>
+  <div class="splash-dev">BY ARTIPLAY</div>
+  <div class="splash-quote">Humility invites progress. When the moon reaches its fullness, it begins to wane. When the cup of tea is full, it begins to spill. And when power reaches its peak, it begins to decline.</div>
+</div>
 <canvas id="gameCanvas"></canvas>
 <div id="vignette"></div>
 <div id="chroma" style="background:linear-gradient(135deg,rgba(255,0,60,0.15),rgba(0,60,255,0.15));"></div>
@@ -371,7 +387,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ba
   <div class="screen-bg"></div>
   <div class="screen-content">
     <div class="owl-emoji" id="titleOwl">🦉</div>
-    <div class="game-title">MIDN8<br>SIX7</div>
+    <div class="game-title">REZBELT<br>DIZEN FL</div>
     <div class="game-sub">FREE TO PLAY · 13 PIPE STYLES</div>
     <div id="titleGuest" style="display:flex;flex-direction:column;gap:10px;width:100%;">
       <div style="text-align:center;padding:10px 0;font-size:10px;font-weight:700;letter-spacing:3px;color:rgba(255,255,255,0.28);">PLAYING AS GUEST · SCORE NOT SAVED</div>
@@ -1054,10 +1070,10 @@ function submitFeedback(){
   document.getElementById('fbSendBtn').textContent='SENDING...';
   var playerInfo=isLinked()?(linkedAthId+(linkedName?' ('+linkedName+')':'')):'GUEST';
   var runInfo='Score: '+score+' | Best: '+bestRunEver;
-  var msgBody=['=== MIDN8 SIX7 FEEDBACK ===','Player: '+playerInfo,'Run: '+runInfo,'Tags: '+(selectedChips.join(', ')||'none'),'Message: '+(text||'none'),'Time: '+new Date().toLocaleString()].join('\n');
+  var msgBody=['=== REZBELT DIZEN FL FEEDBACK ===','Player: '+playerInfo,'Run: '+runInfo,'Tags: '+(selectedChips.join(', ')||'none'),'Message: '+(text||'none'),'Time: '+new Date().toLocaleString()].join('\n');
   try{navigator.clipboard.writeText(msgBody);}catch(e){}
   var a=document.createElement('a');
-  a.href='mailto:'+FEEDBACK_EMAIL+'?subject='+encodeURIComponent('[MIDN8 SIX7] Feedback from '+playerInfo)+'&body='+encodeURIComponent(msgBody);
+  a.href='mailto:'+FEEDBACK_EMAIL+'?subject='+encodeURIComponent('[REZBELT DIZEN FL] Feedback from '+playerInfo)+'&body='+encodeURIComponent(msgBody);
   a.style.display='none';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();},500);
   incFeedbackCount();
   if(isLinked()){ibexWallet+=FEEDBACK_IBEX_REWARD;saveProgress();updateHUD();updateShopWallet();}
@@ -1113,6 +1129,19 @@ var _msReturnTo='title';
 function hideAllScreens(){['titleScreen','goScreen','lbScreen','msScreen'].forEach(function(id){document.getElementById(id).classList.add('hidden');});hideRevive();closeShop();document.getElementById('connectModal').classList.add('hidden');hideConfirm();}
 function showScreen(id){document.getElementById(id).classList.remove('hidden');}
 function showTitle(){state='title';hideAllScreens();showHUD(false);buildTitle();showScreen('titleScreen');}
+function showSplash(){
+  var el=document.getElementById('splashScreen');
+  el.classList.add('show');
+  setTimeout(function(){
+    el.classList.add('fadeout');
+    setTimeout(function(){
+      el.classList.remove('show');
+      el.classList.remove('fadeout');
+      showTitle();
+      if(isLinked()){showToast('👋 '+(linkedName||linkedAthId)+' · '+ibexWallet+' IBEX · '+gemWallet+' 💎','rgba(168,240,255,0.8)');}
+    },600);
+  },8000);
+}
 function buildTitle(){var g=document.getElementById('titleGuest'),l=document.getElementById('titleLinked');var sk=SKINS.filter(function(s){return s.id===equippedSkin;})[0];document.getElementById('titleOwl').textContent=sk?sk.icon:'🦉';if(isLinked()){g.style.display='none';l.style.display='flex';document.getElementById('titleAthId').textContent=linkedAthId;document.getElementById('titleBest').textContent=bestRunEver;document.getElementById('titleIbex').textContent=ibexWallet;document.getElementById('titleGems').textContent=gemWallet;document.getElementById('titleMsCount').textContent=countUnlocked()+'/'+MILESTONES.length;}else{g.style.display='flex';l.style.display='none';}}
 function showMilestones(returnTo){_msReturnTo=returnTo||'title';renderMilestoneDashboard();hideAllScreens();showScreen('msScreen');}
 var QUOTES=["Everyone's too busy worrying about their own life to keep score of yours.","Nobody's watching as closely as you think. The only audience that matters is you.","Your worst moments are someone else's forgotten Tuesday. Keep going.","Embarrassment has an expiry date. Keep playing.","Nobody rehearses your mistakes in their head the way you do. Let it go.","You don't need a perfect run. You just need to show up for the next one.","The version of you that tries and stumbles is braver than the one that never starts.","The fear of looking foolish has stolen more dreams than failure ever could.","Trying badly is still trying. That already puts you ahead of most.","Grace is just giving yourself the same patience you'd offer a friend."];
@@ -1208,9 +1237,9 @@ function loop(ts){requestAnimationFrame(loop);var dt=Math.min(ts-lastTS,50);last
 
 /* ═══ INIT ═══ */
 loadAccount();
-if(isLinked()){loadProgress();loadMilestones();bestRunEver=getLinkedBestRun();checkDaily();showToast('👋 '+(linkedName||linkedAthId)+' · '+ibexWallet+' IBEX · '+gemWallet+' 💎','rgba(168,240,255,0.8)');}
-document.getElementById('versionTag').textContent='MIDN8 SIX7 v12 · MILESTONES';
-showTitle();
+if(isLinked()){loadProgress();loadMilestones();bestRunEver=getLinkedBestRun();checkDaily();}
+document.getElementById('versionTag').textContent='REZBELT DIZEN FL v12 · MILESTONES';
+showSplash();
 requestAnimationFrame(function(ts){lastTS=ts;requestAnimationFrame(loop);});
 </script>
 </body>
