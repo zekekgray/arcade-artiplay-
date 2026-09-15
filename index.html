@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>REZBELT DIZEN FL</title>
+<title>OWLBOUND</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -197,6 +197,20 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ba
 
 #reviveScreen{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:all;}
 #reviveScreen.hidden{display:none!important;}
+.home-btn{position:fixed!important;top:calc(env(safe-area-inset-top,0px)+16px)!important;right:16px!important;left:auto!important;bottom:auto!important;z-index:2147483647!important;width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,0.10);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid rgba(255,255,255,0.22);
+  box-shadow:0 4px 18px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.25),inset 0 -1px 0 rgba(0,0,0,0.15);
+  color:rgba(255,255,255,0.85);font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;z-index:9997;
+  transform:translateZ(0) scale(1);
+  transition:transform 0.42s cubic-bezier(0.34,1.56,0.64,1),background 0.2s ease,box-shadow 0.2s ease;
+  will-change:transform;
+}
+.home-btn.pressed{transform:scale(0.86);transition:transform 0.08s ease-out;background:rgba(255,255,255,0.18);}
+.home-btn:hover{background:rgba(255,255,255,0.14);}
 .revive-bg{position:absolute;inset:0;background:rgba(0,0,0,0.72);backdrop-filter:blur(18px);}
 .revive-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;max-width:320px;padding:0 26px;}
 .revive-icon{font-size:46px;animation:owlFloat 2s ease-in-out infinite;}
@@ -333,8 +347,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ba
 <div id="splashScreen">
   <div class="splash-owl">🦉</div>
   <div class="splash-welcome">WELCOME TO</div>
-  <div class="splash-title">REZBELT<br>DIZEN FL</div>
-  <div class="splash-dev">BY ARTIPLAY</div>
+  <div class="splash-title">OWLBOUND</div>  <div class="splash-dev">BY ARTIPLAY</div>
   <div class="splash-quote">Humility invites progress. When the moon reaches its fullness, it begins to wane. When the cup of tea is full, it begins to spill. And when power reaches its peak, it begins to decline.</div>
 </div>
 <canvas id="gameCanvas"></canvas>
@@ -388,9 +401,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ba
   <div class="screen-bg"></div>
   <div class="screen-content">
     <div class="owl-emoji" id="titleOwl">🦉</div>
-    <div class="game-title">REZBELT<br>DIZEN FL</div>
-    <div class="game-sub">FREE TO PLAY · 13 PIPE STYLES</div>
-    <div id="titleGuest" style="display:flex;flex-direction:column;gap:10px;width:100%;">
+   <div class="game-title">OWLBOUND</div>
+    <div class="game-sub">HOW FAR CAN YOU FLY?</div>    <div id="titleGuest" style="display:flex;flex-direction:column;gap:10px;width:100%;">
       <div id="titleGuestNote" style="text-align:center;padding:10px 0;font-size:10px;font-weight:700;letter-spacing:3px;color:rgba(255,255,255,0.28);">PLAYING AS GUEST · SCORE NOT SAVED</div>
       <button class="btn-primary" id="btnStartGuest" style="font-size:24px;letter-spacing:6px;padding:18px 0;">▶ &nbsp;PLAY NOW</button>
       <button class="btn-primary" id="btnTitleConnect" style="background:rgba(255,215,0,0.08);border-color:rgba(255,215,0,0.3);color:#ffd700;font-size:14px;letter-spacing:3px;padding:14px 0;">💾 &nbsp;SAVE MY PROGRESS</button>
@@ -399,17 +411,18 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ba
       </div>
     </div>
     <div id="titleLinked" style="display:none;flex-direction:column;gap:10px;width:100%;">
-      <div class="info-row-slim"><div class="info-label">PLAYER</div><div class="info-val" id="titleAthId" style="font-size:15px;color:rgba(168,240,255,0.9);"></div></div>
-      <div style="display:flex;gap:8px;width:100%;">
-        <div class="info-row-slim" style="flex:1;flex-direction:column;align-items:flex-start;gap:1px;"><div class="info-label">IBEX</div><div class="info-val" id="titleIbex" style="color:rgba(168,240,255,0.9);">0</div></div>
-        <div class="info-row-slim" style="flex:1;flex-direction:column;align-items:flex-start;gap:1px;"><div class="info-label">💎 GEMS</div><div class="info-val" id="titleGems" style="color:#ffd700;">0</div></div>
+      <div style="text-align:center;padding:4px 0 2px;">
+        <div class="info-label" style="letter-spacing:4px;">BEST RUN</div>
+        <div class="go-score-big" id="titleBest" style="font-size:clamp(46px,12vw,60px);">0</div>
       </div>
-      <div style="display:flex;gap:8px;width:100%;">
-        <div class="info-row-slim" style="flex:1;flex-direction:column;align-items:flex-start;gap:1px;"><div class="info-label">BEST RUN</div><div class="info-val" id="titleBest">0</div></div>
-        <div class="info-row-slim" style="flex:1;flex-direction:column;align-items:flex-start;gap:1px;"><div class="info-label">MILESTONES</div><div class="info-val" id="titleMsCount" style="color:rgba(255,215,0,0.8);">0</div></div>
+      <button class="btn-primary" id="btnStartLinked" style="font-size:26px;letter-spacing:6px;padding:20px 0;box-shadow:0 6px 24px rgba(255,255,255,0.06);">▶ &nbsp;PLAY NOW</button>
+      <div style="display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;padding-top:4px;opacity:0.4;">
+        <span style="font-size:9px;font-weight:700;letter-spacing:2px;color:#fff;" id="titleAthId"></span>
+        <span style="font-size:9px;font-weight:700;letter-spacing:2px;color:rgba(168,240,255,0.9);"><span id="titleIbex">0</span> IBEX</span>
+        <span style="font-size:9px;font-weight:700;letter-spacing:2px;color:#ffd700;">💎 <span id="titleGems">0</span></span>
+        <span style="font-size:9px;font-weight:700;letter-spacing:2px;color:rgba(255,215,0,0.8);">🏆 <span id="titleMsCount">0</span></span>
       </div>
-      <button class="btn-primary" id="btnStartLinked" style="font-size:24px;letter-spacing:6px;padding:18px 0;">▶ &nbsp;PLAY NOW</button>
-      <div style="display:flex;justify-content:center;gap:12px;margin-top:16px;">
+      <div style="display:flex;justify-content:center;gap:12px;margin-top:8px;">
         <button id="btnOpenShopTitle" title="Shop" style="width:46px;height:46px;border-radius:50%;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.3);color:#ffd700;font-size:19px;cursor:pointer;display:flex;align-items:center;justify-content:center;">💎</button>
         <button id="btnMilestonesTitle" title="Milestones" style="width:46px;height:46px;border-radius:50%;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.3);color:#ffd700;font-size:19px;cursor:pointer;display:flex;align-items:center;justify-content:center;">🏆</button>
         <button id="btnLbLinked" title="Leaderboard" style="width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);color:rgba(255,255,255,0.6);font-size:19px;cursor:pointer;display:flex;align-items:center;justify-content:center;">🥇</button>
@@ -422,10 +435,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ba
 <!-- GAME OVER -->
 <div class="screen hidden" id="goScreen" style="overflow-y:auto;justify-content:flex-start;align-items:center;padding:24px 0 40px;">
   <div class="screen-bg"></div>
+  <button id="btnGoHome" class="home-btn" title="Home">🏠</button>
   <div class="screen-content" style="gap:8px;">
-    <div style="font-size:10px;font-weight:700;letter-spacing:5px;color:rgba(255,255,255,0.35);">YOU MADE IT TO</div>
-    <div class="go-score-big" id="goScore">0</div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:6px;color:rgba(255,255,255,0.3);margin-top:-6px;">GAME OVER</div>
+   <div style="font-size:10px;font-weight:700;letter-spacing:5px;color:rgba(255,255,255,0.35);text-align:center;margin-right:-5px;">YOU MADE IT TO</div>
+    <div class="go-score-big" id="goScore" style="text-align:center;">0</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:6px;color:rgba(255,255,255,0.3);margin-top:-6px;text-align:center;margin-right:-6px;">GAME OVER</div>
 
     <div id="goLinked" class="hidden" style="display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;">
       <div id="goStoryLine" style="display:none;flex-direction:column;align-items:center;gap:2px;width:100%;">
@@ -433,7 +447,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ba
         <div id="goStoryDetail" style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#fff;"></div>
         <div id="goStoryReward" style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:rgba(168,240,255,0.85);margin-top:2px;"></div>
       </div>
-      <div id="goPlainBest" style="font-size:11px;font-weight:700;letter-spacing:4px;color:rgba(255,255,255,0.38);">BEST RUN &nbsp;<span id="goBest" style="color:rgba(255,255,255,0.65);">0</span><span id="goPlainEarn" style="color:rgba(168,240,255,0.7);"></span></div>
+      <div id="goPlainBest" style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+         <div style="font-size:10px;font-weight:700;letter-spacing:4px;color:rgba(255,255,255,0.35);text-align:center;margin-right:-4px;">BEST RUN</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:2px;color:#fff;line-height:1;text-align:center;margin-right:-2px;">
+          <span id="goBest">0</span><span id="goPlainEarn" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;color:rgba(168,240,255,0.7);"></span>
+        </div>
+      </div>
       <div id="goNextMs" style="width:100%;margin-top:4px;padding:8px 12px;background:rgba(168,240,255,0.04);border:1px solid rgba(168,240,255,0.18);display:flex;flex-direction:column;align-items:center;gap:3px;">
         <div id="goNextMsLabel" style="font-size:9px;font-weight:700;letter-spacing:3px;color:rgba(168,240,255,0.5);"></div>
         <div id="goNextMsVal" style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:rgba(168,240,255,0.85);letter-spacing:2px;"></div>
@@ -444,16 +463,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ba
       <div style="font-size:11px;font-weight:600;letter-spacing:1px;color:rgba(255,255,255,0.5);text-align:center;padding:2px 0 10px;line-height:1.6;">Save your score + unlock IBEX, Gems &amp; Revive.</div>
       <button class="btn-primary" id="btnGoConnect" style="margin-top:2px;font-size:15px;letter-spacing:3px;padding:14px 0;">✉️ &nbsp;CONTINUE WITH EMAIL</button>
     </div>
-    <button class="btn-primary" id="btnRetry" style="font-size:22px;letter-spacing:6px;padding:20px 0;box-shadow:0 6px 24px rgba(255,255,255,0.06);">▶ &nbsp;PLAY AGAIN</button>
-    <div class="divider" style="margin-top:6px;"></div>
-    <div style="display:flex;justify-content:center;gap:14px;padding-top:2px;margin-top:20px;">
-      <button id="btnGoShop" title="Shop" style="display:none;width:46px;height:46px;border-radius:50%;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.3);color:#ffd700;font-size:19px;cursor:pointer;align-items:center;justify-content:center;">💎</button>
-      <button id="btnGoMilestones" title="Milestones" style="display:none;width:46px;height:46px;border-radius:50%;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.3);color:#ffd700;font-size:19px;cursor:pointer;align-items:center;justify-content:center;">🏆</button>
-      <button id="btnGoLb" title="Leaderboard" style="display:flex;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);color:rgba(255,255,255,0.6);font-size:19px;cursor:pointer;align-items:center;justify-content:center;">🥇</button>
-    </div>
-    <button id="btnGoTitle" style="background:none;border:none;color:rgba(255,255,255,0.2);font-size:8px;font-weight:700;letter-spacing:3px;cursor:pointer;padding:10px 0 4px;margin-top:4px;">MAIN MENU</button>
-    <div id="goHugotText" style="font-size:clamp(9px,2.66vw,11.2px);font-weight:600;color:rgba(255,255,255,0.4);text-align:center;line-height:1.6;margin-top:16px;">...</div>
-  </div>
+          <button class="btn-primary" id="btnRetry" style="width:100%;margin-top:28px;font-size:22px;letter-spacing:6px;padding:20px 0;box-shadow:0 6px 24px rgba(255,255,255,0.06);">▶ &nbsp;PLAY AGAIN</button>  </div>
 </div>
 
 <!-- MILESTONES SCREEN -->
@@ -471,6 +481,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ba
 <!-- REVIVE -->
 <div id="reviveScreen" class="hidden">
   <div class="revive-bg"></div>
+  <button id="btnReviveHome" class="home-btn" title="Home">🏠</button>
   <div class="revive-content">
     <div id="reviveGuest" style="display:none;flex-direction:column;align-items:center;gap:14px;width:100%;">
       <div class="revive-icon">🦉</div>
@@ -498,8 +509,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ba
         <div class="revive-cost-val" id="reviveCostBig">3</div>
       </div>
       <div class="revive-balance" id="reviveBalDisp">WALLET: 0</div>
-      <button class="btn-primary" id="btnRevive">⚡ &nbsp;REVIVE</button>
-      <button class="btn-secondary" id="btnSkipRevive">SKIP →</button>
+            <button class="btn-primary" id="btnRevive" style="width:100%;">⚡ &nbsp;REVIVE</button>      <button class="btn-secondary" id="btnSkipRevive">SKIP →</button>
       <button id="btnOpenFeedback" style="width:100%;padding:10px 0;background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.18);color:rgba(255,215,0,0.6);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;cursor:pointer;margin-top:4px;">💬 &nbsp;QUICK FEEDBACK — EARN 10 IBEX</button>
     </div>
   </div>
@@ -537,7 +547,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ba
         <div class="wallet-chip" style="border-color:rgba(255,215,0,0.2);background:rgba(255,215,0,0.05);"><div class="wchip-label" style="color:rgba(255,215,0,0.55);">💎 GEMS</div><div class="wchip-val" id="shopGemBal" style="color:#ffd700;">0</div></div>
       </div>
       <div class="shop-tabs">
-        <button class="stab active" id="stab0" onclick="switchShopTab(0)">GET GEMS</button>
+        <button class="stab active" id="stab0" onclick="switchShopTab(0)">EXCHANGE</button>
         <button class="stab" id="stab1" onclick="switchShopTab(1)">SKINS</button>
         <button class="stab" id="stab2" onclick="switchShopTab(2)">THEMES</button>
         <button class="stab" id="stab3" onclick="switchShopTab(3)">FX</button>
@@ -641,7 +651,13 @@ var TARGET_FPS=60,FRAME_MS=1000/TARGET_FPS,STEP_S=FRAME_MS/1000;
 var GRAVITY=18,FLAP_VEL=-360,MAX_FALL_VEL=480,WING_SPEED=5.0,TRAIL_FADE=1.0/14;
 var ROOKIE_RUNS_REQUIRED=10,ROOKIE_IBEX=20;
 var DAILY_IBEX=5,DAILY_GEMS=2,DAILY_GEM_CAP=5;
-var SHOP_MAINTENANCE=true;
+var SHOP_MAINTENANCE=false;
+var GEM_PACKAGES=[
+  {id:'pk_small',label:'STARTER',gems:5,ibexCost:40,icon:'💎'},
+  {id:'pk_med',label:'POUCH',gems:15,ibexCost:100,icon:'💰'},
+  {id:'pk_big',label:'CHEST',gems:35,ibexCost:200,icon:'🎁'},
+  {id:'pk_mega',label:'VAULT',gems:80,ibexCost:400,icon:'👑'}
+];
 var WELCOME_IBEX=20;
 var highestMsAtRunStart=0;
 var score=0,lifetimePipes=0,dying=false,state='title';
@@ -1192,7 +1208,38 @@ var shopTabIdx=0,_shopReturn='title';
 function switchShopTab(i){shopTabIdx=i;for(var t=0;t<4;t++)document.getElementById('stab'+t).className='stab'+(t===i?' active':'');renderShopBody();}
 function updateShopWallet(){if(!isLinked())return;document.getElementById('shopIbexBal').textContent=ibexWallet;document.getElementById('shopGemBal').textContent=gemWallet;}
 function renderShopBody(){var el=document.getElementById('shopBody');el.innerHTML='';if(shopTabIdx===0)renderGetGems(el);else if(shopTabIdx===1)renderCosm(el,SKINS,'skin');else if(shopTabIdx===2)renderCosm(el,THEMES,'theme');else renderCosm(el,FX,'fx');}
-function renderGetGems(el){var banner=document.createElement('div');banner.style.cssText='width:100%;padding:10px 14px;background:rgba(255,180,0,0.08);border:1px solid rgba(255,180,0,0.35);display:flex;align-items:center;gap:10px;margin-bottom:14px;';banner.innerHTML='<div style="font-size:20px;">🔧</div><div><div style="font-family:Bebas Neue,sans-serif;font-size:15px;letter-spacing:4px;color:rgba(255,200,0,0.9);">UNDER MAINTENANCE</div><div style="font-size:9px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.35);margin-top:2px;">GEM PURCHASES TEMPORARILY UNAVAILABLE</div></div>';el.appendChild(banner);var info=document.createElement('div');info.style.cssText='padding:28px 16px;text-align:center;border:1px solid rgba(255,180,0,0.12);background:rgba(255,180,0,0.03);';info.innerHTML='<div style="font-size:36px;margin-bottom:12px;">⚙️</div><div style="font-family:Bebas Neue,sans-serif;font-size:20px;letter-spacing:4px;color:rgba(255,200,0,0.7);">GEM SHOP COMING SOON</div><div style="font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.2);margin-top:14px;line-height:2;">Setting up secure payments.<br>Check back soon! 🌙</div>';el.appendChild(info);}
+function renderGetGems(el){
+  var note=document.createElement('div');
+  note.style.cssText='width:100%;padding:9px 12px;background:rgba(168,240,255,0.05);border:1px solid rgba(168,240,255,0.18);display:flex;align-items:center;gap:8px;margin-bottom:12px;';
+  note.innerHTML='<div style="font-size:16px;">⚡</div><div style="font-size:9px;font-weight:700;letter-spacing:2px;color:rgba(168,240,255,0.65);line-height:1.5;">EXCHANGE YOUR IBEX FOR GEMS</div>';
+  el.appendChild(note);
+  var grid=document.createElement('div');
+  grid.className='cosm-grid';
+  GEM_PACKAGES.forEach(function(pk){
+    var card=document.createElement('div');
+    card.className='cosm-card';
+    card.innerHTML='<div class="cosm-icon">'+pk.icon+'</div><div class="cosm-name">'+pk.label+'</div><div class="cosm-cost" style="color:rgba(168,240,255,0.9);">+'+pk.gems+' 💎</div><div style="font-size:9px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.3);margin-top:2px;">'+pk.ibexCost+' IBEX</div>';
+    card.onclick=function(){showConfirmGemPackage(pk);};
+    grid.appendChild(card);
+  });
+  el.appendChild(grid);
+}
+function showConfirmGemPackage(pk){
+  if(!isLinked()){showToast('SAVE YOUR PROGRESS FIRST','rgba(255,215,0,0.8)');return;}
+  if(ibexWallet<pk.ibexCost){showToast('NOT ENOUGH IBEX','rgba(255,80,80,0.9)');return;}
+  document.getElementById('cdItem').textContent=pk.label+' — +'+pk.gems+' GEMS';
+  document.getElementById('cdCost').textContent=pk.ibexCost+' IBEX';
+  document.getElementById('cdBal').textContent='WALLET: '+ibexWallet+' IBEX';
+  document.getElementById('cdConfirm').onclick=function(){
+    hideConfirm();
+    ibexWallet-=pk.ibexCost;
+    gemWallet+=pk.gems;
+    saveProgress();updateShopWallet();updateHUD();renderShopBody();
+    showToast('💎 +'+pk.gems+' GEMS ADDED','rgba(168,240,255,0.9)');
+    playGemCollect();
+  };
+  document.getElementById('confirmDialog').classList.remove('hidden');
+}
 function renderCosm(el,catalog,type){var grid=document.createElement('div');grid.className='cosm-grid';catalog.forEach(function(item){var key=type+'_'+item.id;var owned=ownedItems[key]||item.cost===0;var equipped=(type==='skin'&&equippedSkin===item.id)||(type==='theme'&&equippedTheme===item.id)||(type==='fx'&&equippedFX===item.id);var card=document.createElement('div');card.className='cosm-card'+(equipped?' equipped':owned?' owned':'');var badgeHtml='';if(equipped)badgeHtml='<div class="cosm-badge badge-eq">ON</div>';else if(owned)badgeHtml='<div class="cosm-badge badge-owned">OWNED</div>';else if(item.cost===0)badgeHtml='<div class="cosm-badge badge-free">FREE</div>';else if(item.isNew)badgeHtml='<div class="cosm-badge badge-new">NEW</div>';card.innerHTML=badgeHtml+'<div class="cosm-icon">'+item.icon+'</div><div class="cosm-name">'+item.name+'</div><div class="cosm-cost">'+(item.cost===0?'FREE':item.cost+' 💎')+'</div>';card.onclick=function(){if(equipped)return;if(owned){equipItem(type,item.id);renderShopBody();}else showConfirmCosm(item,type,key);};grid.appendChild(card);});el.appendChild(grid);}
 function showConfirmCosm(item,type,key){if(!isLinked()){showToast('SAVE YOUR PROGRESS FIRST','rgba(255,215,0,0.8)');return;}if(gemWallet<item.cost){showToast('NOT ENOUGH GEMS 💎','rgba(255,80,80,0.9)');return;}document.getElementById('cdItem').textContent=item.name;document.getElementById('cdCost').textContent=item.cost+' 💎 GEMS';document.getElementById('cdBal').textContent='WALLET: '+gemWallet+' GEMS';document.getElementById('cdConfirm').onclick=function(){hideConfirm();gemWallet-=item.cost;ownedItems[key]=true;equipItem(type,item.id);saveProgress();updateShopWallet();updateHUD();renderShopBody();showToast('💎 UNLOCKED: '+item.name,'rgba(168,240,255,0.9)');playSuccess();};document.getElementById('confirmDialog').classList.remove('hidden');}
 function hideConfirm(){document.getElementById('confirmDialog').classList.add('hidden');}
@@ -1234,8 +1281,6 @@ function showSplash(){
     setTimeout(function(){
       el.classList.remove('show');
       el.classList.remove('fadeout');
-      showTitle();
-      if(isLinked()){showToast('👋 '+(linkedName||linkedAthId)+' · '+ibexWallet+' IBEX · '+gemWallet+' 💎','rgba(168,240,255,0.8)');}
     },600);
   },2600);
 }
@@ -1244,7 +1289,7 @@ function showMilestones(returnTo){_msReturnTo=returnTo||'title';renderMilestoneD
 var QUOTES=["Everyone's too busy worrying about their own life to keep score of yours.","Nobody's watching as closely as you think. The only audience that matters is you.","Your worst moments are someone else's forgotten Tuesday. Keep going.","Embarrassment has an expiry date. Keep playing.","Nobody rehearses your mistakes in their head the way you do. Let it go.","You don't need a perfect run. You just need to show up for the next one.","The version of you that tries and stumbles is braver than the one that never starts.","The fear of looking foolish has stolen more dreams than failure ever could.","Trying badly is still trying. That already puts you ahead of most.","Grace is just giving yourself the same patience you'd offer a friend."];
 var _qi=Math.floor(Math.random()*QUOTES.length);
 function getNextQuote(){var q=QUOTES[_qi];_qi=(_qi+1)%QUOTES.length;return q;}
-function showGO(){if(goShown)return;goShown=true;hideAllScreens();showHUD(false);document.getElementById('goHugotText').textContent=getNextQuote();showScreen('goScreen');document.getElementById('nbBadge').classList.toggle('show',newBestThisRun&&isLinked());document.getElementById('goScore').textContent=score;document.getElementById('btnGoShop').style.display=isLinked()?'flex':'none';document.getElementById('btnGoMilestones').style.display=isLinked()?'flex':'none';
+function showGO(){if(goShown)return;goShown=true;hideAllScreens();showHUD(false);showScreen('goScreen');document.getElementById('goScore').textContent=score;
   if(isLinked()){
     document.getElementById('goLinked').classList.remove('hidden');document.getElementById('goGuest').classList.add('hidden');
     document.getElementById('goBest').textContent=bestRunEver;
@@ -1290,39 +1335,51 @@ function startGame(){resumeAC();canvas.style.pointerEvents='auto';score=0;newBes
 function die(){if(!bird.alive||dying)return;dying=true;bird.alive=false;state='dead';playDie();combo=0;canvas.style.pointerEvents='none';var ch=document.getElementById('chroma');ch.classList.remove('flash');void ch.offsetWidth;ch.classList.add('flash');var V=getVivid();for(var i=0;i<V.length;i++)spawnParts(bird.x+bird.w/2,bird.y+bird.h/2,8,V[i]);showHUD(false);setTimeout(function(){dying=false;if(isLinked())showRevive();else showGO();},900);}
 
 /* ═══ BUTTONS ═══ */
-document.getElementById('btnStartGuest').onclick=startGame;
-document.getElementById('btnStartLinked').onclick=startGame;
-document.getElementById('btnRetry').onclick=function(){hideAllScreens();startGame();};
-document.getElementById('btnGoTitle').onclick=showTitle;
-document.getElementById('btnGoLb').onclick=function(){lbReturnTo='go';showLB();};
-document.getElementById('btnGoShop').onclick=function(){openShop('go');};
-document.getElementById('btnGoMilestones').onclick=function(){showMilestones('go');};
-document.getElementById('btnMilestonesTitle').onclick=function(){showMilestones('title');};
-document.getElementById('btnMsBack').onclick=function(){if(_msReturnTo==='go')showGO();else showTitle();};
-document.getElementById('btnLbBack').onclick=function(){hideAllScreens();if(lbReturnTo==='go'){goShown=false;showGO();}else showTitle();};
-document.getElementById('btnLbGuest').onclick=function(){lbReturnTo='title';showLB();};
-document.getElementById('btnLbLinked').onclick=function(){lbReturnTo='title';showLB();};
-document.getElementById('btnTitleConnect').onclick=function(){showConnect('NO PASSWORD · TAKES 5 SECONDS',function(id){if(id)buildTitle();});};
-document.getElementById('btnGoConnect').onclick=function(){showConnect('SAVE THIS RUN · NO PASSWORD',function(id){if(id)showGO();});};
-document.getElementById('btnCloseShop').onclick=closeShop;
-document.getElementById('shopBg').onclick=closeShop;
-document.getElementById('rTabIbex').onclick=function(){reviveMode='ibex';updateReviveTab();};
-document.getElementById('rTabGem').onclick=function(){reviveMode='gem';updateReviveTab();};
-document.getElementById('btnRevive').onclick=doRevive;
-document.getElementById('btnSkipRevive').onclick=function(){stopReviveTimer();hideRevive();showGO();};
-document.getElementById('btnReviveGuestSkip').onclick=function(){hideRevive();showGO();};
-document.getElementById('btnReviveGuestConnect').onclick=function(){hideRevive();showConnect('SAVE THIS RUN · NO PASSWORD',function(id){if(id)showRevive();else showGO();});};
-document.getElementById('cdCancel').onclick=hideConfirm;
-document.getElementById('cdBg').onclick=hideConfirm;
-document.getElementById('tabHaveId').onclick=function(){switchConnectTab('have');};
-document.getElementById('tabNewId').onclick=function(){switchConnectTab('new');};
-document.getElementById('restoreLink').onclick=function(){var h=document.getElementById('panelHaveId').style.display!=='none';switchConnectTab(h?'new':'have');this.textContent=h?'ALREADY HAVE AN ACCOUNT? SIGN IN →':'← BACK TO SIGN UP';};
-document.getElementById('btnAthConnect').onclick=function(){var e=document.getElementById('signinEmail').value;if(!isValidEmail(e)){document.getElementById('athIdError').textContent='Enter a valid email.';return;}var id=deriveAthId(e);var known=!!SS.get('msky_p_'+id);finishConnect(id,'',!known);};
-document.getElementById('btnSignupCreate').onclick=function(){var n=document.getElementById('signupName').value.trim(),e=document.getElementById('signupEmail').value.trim();if(!e||!e.includes('@')){document.getElementById('signupError').textContent='Enter a valid email.';return;}var id=deriveAthId(e);finishConnect(id,n||'Player',!SS.get('msky_p_'+id));};
-document.getElementById('btnConnectSkip').onclick=function(){hideConnect();if(connectCB){connectCB(null,false);connectCB=null;}};
-document.getElementById('connectModalBg').onclick=function(){document.getElementById('btnConnectSkip').onclick();};
-document.getElementById('signinEmail').addEventListener('input',function(){this.className='field-input'+(isValidEmail(this.value)?' valid':'');});
-document.getElementById('btnOpenShopTitle').addEventListener('click',function(){shopTapCount++;if(shopTapTimer)clearTimeout(shopTapTimer);shopTapTimer=setTimeout(function(){shopTapCount=0;},900);if(shopTapCount>=5){shopTapCount=0;clearTimeout(shopTapTimer);openAdminPanel();return;}openShop('title');},true);
+/* safe wiring — kahit may missing element, hindi masisira ang ibang buttons */
+function on(id,fn){var el=document.getElementById(id);if(el){el.onclick=fn;}else{console.warn('[wire] missing element:',id);}}
+function onEv(id,ev,fn,opts){var el=document.getElementById(id);if(el){el.addEventListener(ev,fn,opts);}else{console.warn('[wire] missing element:',id);}}
+
+on('btnStartGuest',startGame);
+on('btnStartLinked',startGame);
+on('btnRetry',function(){hideAllScreens();startGame();});
+on('btnGoHome',function(){
+  var b=this;b.classList.add('pressed');
+  haptic(10);
+  setTimeout(function(){b.classList.remove('pressed');},90);
+  hideAllScreens();showTitle();
+});
+on('btnMilestonesTitle',function(){showMilestones('title');});
+on('btnMsBack',function(){if(_msReturnTo==='go')showGO();else showTitle();});
+on('btnLbBack',function(){hideAllScreens();if(lbReturnTo==='go'){goShown=false;showGO();}else showTitle();});
+on('btnLbGuest',function(){lbReturnTo='title';showLB();});
+on('btnLbLinked',function(){lbReturnTo='title';showLB();});
+on('btnTitleConnect',function(){showConnect('NO PASSWORD · TAKES 5 SECONDS',function(id){if(id)buildTitle();});});
+on('btnGoConnect',function(){showConnect('SAVE THIS RUN · NO PASSWORD',function(id){if(id)showGO();});});
+on('btnCloseShop',closeShop);
+on('shopBg',closeShop);
+on('rTabIbex',function(){reviveMode='ibex';updateReviveTab();});
+on('rTabGem',function(){reviveMode='gem';updateReviveTab();});
+on('btnRevive',doRevive);
+on('btnSkipRevive',function(){stopReviveTimer();hideRevive();showGO();});
+on('btnReviveHome',function(){
+  var b=this;b.classList.add('pressed');
+  haptic(10);
+  setTimeout(function(){b.classList.remove('pressed');},90);
+  stopReviveTimer();hideRevive();showTitle();
+});
+on('btnReviveGuestSkip',function(){hideRevive();showGO();});
+on('btnReviveGuestConnect',function(){hideRevive();showConnect('SAVE THIS RUN · NO PASSWORD',function(id){if(id)showRevive();else showGO();});});
+on('cdCancel',hideConfirm);
+on('cdBg',hideConfirm);
+on('tabHaveId',function(){switchConnectTab('have');});
+on('tabNewId',function(){switchConnectTab('new');});
+on('restoreLink',function(){var h=document.getElementById('panelHaveId').style.display!=='none';switchConnectTab(h?'new':'have');this.textContent=h?'ALREADY HAVE AN ACCOUNT? SIGN IN →':'← BACK TO SIGN UP';});
+on('btnAthConnect',function(){var e=document.getElementById('signinEmail').value;if(!isValidEmail(e)){document.getElementById('athIdError').textContent='Enter a valid email.';return;}var id=deriveAthId(e);var known=!!SS.get('msky_p_'+id);finishConnect(id,'',!known);});
+on('btnSignupCreate',function(){var n=document.getElementById('signupName').value.trim(),e=document.getElementById('signupEmail').value.trim();if(!e||!e.includes('@')){document.getElementById('signupError').textContent='Enter a valid email.';return;}var id=deriveAthId(e);finishConnect(id,n||'Player',!SS.get('msky_p_'+id));});
+on('btnConnectSkip',function(){hideConnect();if(connectCB){connectCB(null,false);connectCB=null;}});
+on('connectModalBg',function(){var s=document.getElementById('btnConnectSkip');if(s)s.onclick();});
+onEv('signinEmail','input',function(){this.className='field-input'+(isValidEmail(this.value)?' valid':'');});
+onEv('btnOpenShopTitle','click',function(){shopTapCount++;if(shopTapTimer)clearTimeout(shopTapTimer);shopTapTimer=setTimeout(function(){shopTapCount=0;},900);if(shopTapCount>=5){shopTapCount=0;clearTimeout(shopTapTimer);openAdminPanel();return;}openShop('title');},true);
 
 /* ═══ INPUT ═══ */
 function tryFlap(){if(state==='playing'&&bird.alive)bird.flap();}
